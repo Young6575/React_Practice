@@ -3,17 +3,26 @@ import React, { useEffect, useState } from 'react'
 export default function TailCard({iurl, title, location, date , hashtag}) {
 
     const delimiters = /[,]+/;
+    const head = ["이용가능시간: ","충전기상태: ","충천용량: ","충전방식: ","주차료: "]
 
- const tag = hashtag.split(delimiters).map(item => <span key={item} className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3 text-left ">
-                                    {item.trim()}
-                                    </span>)
+ const tag = Array.isArray(hashtag)
+    ? hashtag.map((item, idx) => (
+        <span key={idx} className="bg-amber-200 mr-3 rounded-3xl">
+          {head[idx]}{item}
+        </span>
+      ))
+    : hashtag?.split(/[,]+/).map((item, idx) => (
+        <span key={idx} className="...">
+          {item.trim()}
+        </span>
+      ));
 
   return (
   
 
         
 
-<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div className="h-40 w-120 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
         <img className="rounded-t-lg" src={iurl} alt="" />
     </a>
